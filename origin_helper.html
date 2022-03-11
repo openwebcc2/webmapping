@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create git-command to set github origin with user, repo and token</title>
+    <style>
+        input {
+            font-size: 1.5em;
+            line-height: 1.5em;
+        }
+
+        label {
+            font-size: 1.5em;
+            display: inline-block;
+            width: 6em;
+        }
+
+        #command {
+            font-size: 0.8em;
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Create git-command to set github origin with user, repo and token</h1>
+    <div class="form">
+        <p>
+            <label for="user">User: </label><input type="text" name="user" id="user" placeholder="user"><br>
+        </p>
+        <p>
+            <label for="user">Repo: </label><input type="text" name="token" id="repo" placeholder="repo"><br>
+        </p>
+        <p> <label for="user">Token: </label><input type="text" name="token" id="token" placeholder="token" size="40"><br>
+        </p>
+        <p>
+            <label for="command">Command: </label><input type="text" name="command" id="command" onfocus="this.select()">
+        </p>
+
+    </div>
+    <script>
+        let fields = document.querySelectorAll("input");
+        for (field of fields) {
+            field.onkeyup = (evt) => {
+                let values = {
+                    user: document.querySelector("#user").value || "user",
+                    repo: document.querySelector("#repo").value || "repo",
+                    token: document.querySelector("#token").value || "token",
+                }
+                document.querySelector("#command").value = `git remote set-url origin https://${values.user}:${values.token}@github.com/${values.user}/${values.repo}.git; git remote -v`
+            }
+        }
+    </script>
+</body>
+
+</html>
